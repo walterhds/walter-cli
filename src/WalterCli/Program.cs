@@ -1,5 +1,5 @@
 ﻿using System.CommandLine;
-using WalterCli.Commands.Register;
+using Walter.Commands.Register;
 
 var rootCommand = new RootCommand("Walter CLI");
 rootCommand.Aliases.Add("walter");
