@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ECF5835B-3728-4A93-BC55-ABA91771CC89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalterCli", "src\WalterCli\WalterCli.csproj", "{6252680F-5CBC-243F-9DD1-4BC5B8B70016}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Walter", "src\WalterCli\Walter.csproj", "{6252680F-5CBC-243F-9DD1-4BC5B8B70016}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
