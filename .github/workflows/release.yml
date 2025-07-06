@@ -84,7 +84,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Publish package
-        run: write-host "Publishing package to NuGet..."
+        run: echo "Publishing package to NuGet..."
         # env:
         #   NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
 
@@ -97,4 +97,4 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Update version
-        run: write-host "Updating version in scripts..."
+        run: echo "Updating version in scripts..."
