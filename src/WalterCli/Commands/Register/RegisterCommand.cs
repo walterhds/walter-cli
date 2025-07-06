@@ -8,10 +8,12 @@ namespace Walter.Commands.Register;
 [CliCommand(Name = "register", Description = "Register a new script")]
 internal class RegisterCommand(
 	IRecordRepository recordRepository,
-	IConsoleWrapper consoleWrapper)
+	IConsoleWrapper consoleWrapper,
+	IIOWrapper ioWrapper)
 		: CommandBase(
 			recordRepository,
-			consoleWrapper)
+			consoleWrapper,
+			ioWrapper)
 {
 	[CliArgument(Description = "The name of the script to register")]
 	public string? NameArgument { get; set; }
@@ -33,7 +35,7 @@ internal class RegisterCommand(
 			return;
 		}
 
-		if (!File.Exists(PathArgument))
+		if (!IOWrapper.FileExists(PathArgument))
 		{
 			ConsoleWrapper.WriteError($"The file at path '{PathArgument}' does not exist.");
 			return;

@@ -17,6 +17,9 @@ public class Register
 		// Arrange
 		IRecordRepository recordRepository = Substitute.For<IRecordRepository>();
 		IConsoleWrapper consoleWrapper = Substitute.For<IConsoleWrapper>();
+		IIOWrapper ioWrapper = Substitute.For<IIOWrapper>();
+		string scriptPath = "/path/to/script";
+		ioWrapper.FileExists(scriptPath).Returns(true);
 		recordRepository.GetRecord().Returns(new Record()
 		{
 			ScriptList = []
@@ -27,9 +30,10 @@ public class Register
 				.AddSingleton<ISerializer, Walter.Wrappers.Serializer>()
 				.AddSingleton(_ => recordRepository)
 				.AddSingleton(_ => consoleWrapper)
+				.AddSingleton(_ => ioWrapper)
 				;
 		});
-		string[] args = ["register", "TestScript", "/path/to/script"];
+		string[] args = ["register", "TestScript", scriptPath];
 
 		// Act
 		Cli.Run<Walter.Commands.Root.RootCommand>(args);

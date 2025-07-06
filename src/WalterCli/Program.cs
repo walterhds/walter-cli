@@ -23,5 +23,6 @@ static void ConfigureServices() => Cli.Ext.ConfigureServices(services =>
 		.AddSingleton<ISerializer, Serializer>()
 		.AddSingleton<IRecordRepository, RecordRepository>()
 		.AddSingleton<IConsoleWrapper, ConsoleWrapper>()
+		.AddSingleton<IIOWrapper, IOWrapper>()
 		;
 });

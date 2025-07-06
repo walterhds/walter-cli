@@ -5,9 +5,12 @@ namespace Walter.Commands;
 
 internal abstract class CommandBase(
 	IRecordRepository recordRepository,
-	IConsoleWrapper consoleWrapper)
+	IConsoleWrapper consoleWrapper,
+	IIOWrapper ioWrapper)
 {
 	protected readonly IRecordRepository RecordRepository = recordRepository;
 
 	protected readonly IConsoleWrapper ConsoleWrapper = consoleWrapper;
+
+	protected readonly IIOWrapper IOWrapper = ioWrapper;
 }
