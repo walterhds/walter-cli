@@ -1,8 +1,26 @@
-﻿using System.CommandLine;
-using Walter.Commands.Register;
+﻿using DotMake.CommandLine;
+using Microsoft.Extensions.DependencyInjection;
+using Walter.Commands.Root;
+using Walter.Helpers;
+using Walter.Helpers.Interfaces;
+using Walter.Repositories;
+using Walter.Repositories.Interfaces;
 
-var rootCommand = new RootCommand("Walter CLI");
+try
+{
+	ConfigureServices();
 
-rootCommand.Subcommands.Add(new RegisterCommand());
+	Cli.Run<RootCommand>(args);
+}
+catch (Exception e)
+{
+	Console.WriteLine(@"Error: {0}", e.Message);
+}
 
-rootCommand.Parse(args).Invoke();
+static void ConfigureServices() => Cli.Ext.ConfigureServices(services =>
+{
+	services
+		.AddSingleton<ISerializer, Serializer>()
+		.AddSingleton<IRecordRepository, RecordRepository>()
+		;
+});

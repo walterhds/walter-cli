@@ -1,50 +1,52 @@
-﻿using System.CommandLine;
+﻿using DotMake.CommandLine;
 using Walter.Models;
+using Walter.Repositories.Interfaces;
 
 namespace Walter.Commands.Register;
 
-internal class RegisterCommand : CommandBase
+[CliCommand(Name = "register", Description = "Register a new script")]
+internal class RegisterCommand(IRecordRepository recordRepository) : CommandBase(recordRepository)
 {
-	private readonly Argument<string> _nameArgument = new("name");
-	private readonly Argument<string> _pathArgument = new("path");
+	[CliArgument(Description = "The name of the script to register")]
+	public string? NameArgument { get; set; }
 
-	public RegisterCommand() : base("register", "Register a new script")
+	[CliArgument(Description = "The path to the script file to register")]
+	public string? PathArgument { get; set; }
+
+	public void Run()
 	{
-		Add(_nameArgument);
-		Add(_pathArgument);
-
-		SetAction((result) =>
+		if (string.IsNullOrWhiteSpace(NameArgument) && string.IsNullOrWhiteSpace(PathArgument))
 		{
-			string? path = result.GetValue(_pathArgument);
-			string? name = result.GetValue(_nameArgument);
+			Console.WriteLine("Name and path cannot be empty.");
+			return;
+		}
 
-			if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(path))
-			{
-				Console.WriteLine("Name and path cannot be empty.");
-				return;
-			}
+		if (string.IsNullOrWhiteSpace(NameArgument) || string.IsNullOrWhiteSpace(PathArgument))
+		{
+			Console.WriteLine("Name and path cannot be empty.");
+			return;
+		}
 
-			if (!File.Exists(path))
-			{
-				Console.WriteLine($"The file at path '{path}' does not exist.");
-				return;
-			}
+		if (!File.Exists(PathArgument))
+		{
+			Console.WriteLine($"The file at path '{PathArgument}' does not exist.");
+			return;
+		}
 
-			Record record = RecordRepository.GetRecord();
+		Record record = RecordRepository.GetRecord();
 
-			if (record.ScriptList.Any(script => script.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase)))
-			{
-				Console.WriteLine($"A script with the name '{name}' already exists.");
-				return;
-			}
+		if (record.ScriptList.Any(script => script.Name.Equals(NameArgument, StringComparison.CurrentCultureIgnoreCase)))
+		{
+			Console.WriteLine($"A script with the name '{NameArgument}' already exists.");
+			return;
+		}
 
-			var script = new Script(name, path);
+		var script = new Script(NameArgument, PathArgument);
 
-			record.ScriptList.Add(script);
+		record.ScriptList.Add(script);
 
-			RecordRepository.SaveRecord(record);
+		RecordRepository.SaveRecord(record);
 
-			Console.WriteLine($"Script {name} registered.");
-		});
+		Console.WriteLine($"Script {NameArgument} registered.");
 	}
 }

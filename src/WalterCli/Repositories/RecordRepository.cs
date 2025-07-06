@@ -1,17 +1,13 @@
-﻿using Walter.Helpers;
+﻿using Walter.Helpers.Interfaces;
 using Walter.Models;
+using Walter.Repositories.Interfaces;
 
 namespace Walter.Repositories;
 
-internal class RecordRepository
+internal class RecordRepository(ISerializer serializer) : IRecordRepository
 {
 	private readonly string _recordPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Records", "records.json");
-	private readonly Serializer _serializer = Serializer.Instance;
-
-	public static RecordRepository Instance { get; } = new RecordRepository();
-
-	private RecordRepository()
-	{ }
+	private readonly ISerializer _serializer = serializer;
 
 	public Record GetRecord()
 	{

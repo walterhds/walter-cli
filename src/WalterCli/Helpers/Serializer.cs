@@ -1,14 +1,10 @@
 ﻿using System.Text.Json;
+using Walter.Helpers.Interfaces;
 
 namespace Walter.Helpers;
 
-public class Serializer
+public class Serializer : ISerializer
 {
-	public static Serializer Instance { get; } = new Serializer();
-
-	private Serializer()
-	{ }
-
 	private readonly JsonSerializerOptions _options = new()
 	{
 		PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
@@ -17,11 +13,13 @@ public class Serializer
 	};
 
 	public string Serialize<T>(T obj)
+		where T : class
 	{
 		return JsonSerializer.Serialize(obj, _options);
 	}
 
 	public T Deserialize<T>(string json)
+		where T : class
 	{
 		return JsonSerializer.Deserialize<T>(json, _options) ?? throw new InvalidOperationException("Deserialization failed.");
 	}

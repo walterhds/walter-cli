@@ -1,8 +1,8 @@
-﻿using System.CommandLine;
-using Walter.Repositories;
+﻿using Walter.Repositories.Interfaces;
 
 namespace Walter.Commands;
-internal abstract class CommandBase(string name, string description) : Command(name, description)
+
+internal abstract class CommandBase(IRecordRepository recordRepository)
 {
-	protected readonly RecordRepository RecordRepository = RecordRepository.Instance;
+	protected readonly IRecordRepository RecordRepository = recordRepository;
 }
