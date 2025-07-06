@@ -25,5 +25,4 @@ static void ConfigureServices() => Cli.Ext.ConfigureServices(services =>
 		.AddSingleton<IConsoleWrapper, ConsoleWrapper>()
 		.AddSingleton<IIOWrapper, IOWrapper>()
 		;
-
 });
