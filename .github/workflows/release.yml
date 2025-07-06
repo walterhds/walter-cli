@@ -52,7 +52,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Test
-        run: dotnet make test
+        run: dotnet test
 
   pack:
     name: Pack
