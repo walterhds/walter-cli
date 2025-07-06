@@ -15,7 +15,7 @@ public class Serializer
 		{
 			ScriptList = [original]
 		};
-		var serializer = new Walter.Helpers.Serializer();
+		var serializer = new Walter.Wrappers.Serializer();
 
 		// Act
 		string serialized = serializer.Serialize(record);

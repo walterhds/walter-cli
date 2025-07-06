@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
-using Walter.Helpers.Interfaces;
+using Walter.Wrappers.Interfaces;
 
-namespace Walter.Helpers;
+namespace Walter.Wrappers;
 
 public class Serializer : ISerializer
 {

@@ -1,4 +1,4 @@
-﻿namespace Walter.Helpers.Interfaces;
+﻿namespace Walter.Wrappers.Interfaces;
 internal interface ISerializer
 {
 	T Deserialize<T>(string content) where T : class;

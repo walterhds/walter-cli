@@ -1,6 +1,6 @@
-﻿using Walter.Helpers.Interfaces;
-using Walter.Models;
+﻿using Walter.Models;
 using Walter.Repositories.Interfaces;
+using Walter.Wrappers.Interfaces;
 
 namespace Walter.Repositories;
 

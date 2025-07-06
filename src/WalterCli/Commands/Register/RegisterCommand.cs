@@ -1,11 +1,17 @@
 ﻿using DotMake.CommandLine;
 using Walter.Models;
 using Walter.Repositories.Interfaces;
+using Walter.Wrappers.Interfaces;
 
 namespace Walter.Commands.Register;
 
 [CliCommand(Name = "register", Description = "Register a new script")]
-internal class RegisterCommand(IRecordRepository recordRepository) : CommandBase(recordRepository)
+internal class RegisterCommand(
+	IRecordRepository recordRepository,
+	IConsoleWrapper consoleWrapper)
+		: CommandBase(
+			recordRepository,
+			consoleWrapper)
 {
 	[CliArgument(Description = "The name of the script to register")]
 	public string? NameArgument { get; set; }
@@ -17,19 +23,19 @@ internal class RegisterCommand(IRecordRepository recordRepository) : CommandBase
 	{
 		if (string.IsNullOrWhiteSpace(NameArgument) && string.IsNullOrWhiteSpace(PathArgument))
 		{
-			Console.WriteLine("Name and path cannot be empty.");
+			ConsoleWrapper.WriteError("Name and path cannot be empty.");
 			return;
 		}
 
 		if (string.IsNullOrWhiteSpace(NameArgument) || string.IsNullOrWhiteSpace(PathArgument))
 		{
-			Console.WriteLine("Name and path cannot be empty.");
+			ConsoleWrapper.WriteError("Name and path cannot be empty.");
 			return;
 		}
 
 		if (!File.Exists(PathArgument))
 		{
-			Console.WriteLine($"The file at path '{PathArgument}' does not exist.");
+			ConsoleWrapper.WriteError($"The file at path '{PathArgument}' does not exist.");
 			return;
 		}
 
@@ -37,7 +43,7 @@ internal class RegisterCommand(IRecordRepository recordRepository) : CommandBase
 
 		if (record.ScriptList.Any(script => script.Name.Equals(NameArgument, StringComparison.CurrentCultureIgnoreCase)))
 		{
-			Console.WriteLine($"A script with the name '{NameArgument}' already exists.");
+			ConsoleWrapper.WriteError($"A script with the name '{NameArgument}' already exists.");
 			return;
 		}
 
@@ -47,6 +53,6 @@ internal class RegisterCommand(IRecordRepository recordRepository) : CommandBase
 
 		RecordRepository.SaveRecord(record);
 
-		Console.WriteLine($"Script {NameArgument} registered.");
+		ConsoleWrapper.WriteLine($"Script {NameArgument} registered.");
 	}
 }
