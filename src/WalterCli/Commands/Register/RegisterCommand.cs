@@ -1,5 +1,7 @@
 ﻿using DotMake.CommandLine;
+using Walter.Exceptions;
 using Walter.Models;
+using Walter.Models.Interfaces;
 using Walter.Repositories.Interfaces;
 using Walter.Wrappers.Interfaces;
 
@@ -23,29 +25,20 @@ internal class RegisterCommand(
 
 	public void Run()
 	{
-		if (string.IsNullOrWhiteSpace(NameArgument) && string.IsNullOrWhiteSpace(PathArgument))
-		{
-			ConsoleWrapper.WriteError("Name and path cannot be empty.");
-			return;
-		}
-
-		if (string.IsNullOrWhiteSpace(NameArgument) || string.IsNullOrWhiteSpace(PathArgument))
-		{
-			ConsoleWrapper.WriteError("Name and path cannot be empty.");
-			return;
-		}
+		ArgumentNullException.ThrowIfNullOrWhiteSpace(NameArgument, nameof(NameArgument));
+		ArgumentNullException.ThrowIfNullOrWhiteSpace(PathArgument, nameof(PathArgument));
 
 		if (!IOWrapper.FileExists(PathArgument))
 		{
-			ConsoleWrapper.WriteError($"The file at path '{PathArgument}' does not exist.");
+			ConsoleWrapper.WriteError(new ScriptNotFoundException(PathArgument).Serialize());
 			return;
 		}
 
-		Record record = RecordRepository.GetRecord();
+		IRecord record = RecordRepository.GetRecord();
 
 		if (record.ScriptList.Any(script => script.Name.Equals(NameArgument, StringComparison.CurrentCultureIgnoreCase)))
 		{
-			ConsoleWrapper.WriteError($"A script with the name '{NameArgument}' already exists.");
+			ConsoleWrapper.WriteError(new ScriptAlreadyRegisteredException(NameArgument).ToString());
 			return;
 		}
 

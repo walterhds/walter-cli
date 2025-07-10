@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\WalterCli\Walter.csproj" />
+    <ProjectReference Include="..\Test.Data\Test.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>
