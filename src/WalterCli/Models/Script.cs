@@ -1,6 +1,13 @@
-﻿namespace Walter.Models;
+﻿using Walter.Models.Interfaces;
 
-internal record Script(
-	string Name,
-	string Path)
-{ }
+namespace Walter.Models;
+
+internal class Script(
+	string name,
+	string path)
+		: IScript
+{
+	public string Name { get; set; } = name;
+
+	public string Path { get; set; } = path;
+}

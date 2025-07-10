@@ -1,4 +1,5 @@
 ﻿using Walter.Models;
+using Walter.Models.Interfaces;
 using Walter.Repositories.Interfaces;
 using Walter.Wrappers.Interfaces;
 
@@ -13,7 +14,7 @@ internal class RecordRepository(
 	private readonly ISerializer _serializer = serializer;
 	private readonly IIOWrapper _ioWrapper = ioWrapper;
 
-	public Record GetRecord()
+	public IRecord GetRecord()
 	{
 		PrepareFolderPath();
 
@@ -26,7 +27,7 @@ internal class RecordRepository(
 		return new Record();
 	}
 
-	public void SaveRecord(Record record)
+	public void SaveRecord(IRecord record)
 	{
 		PrepareFolderPath();
 

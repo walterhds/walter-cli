@@ -1,5 +1,5 @@
 ﻿namespace Walter.Wrappers.Interfaces;
-internal interface IIOWrapper
+public interface IIOWrapper
 {
 	bool FileExists(string filePath);
 	string FileReadAllText(string filePath);

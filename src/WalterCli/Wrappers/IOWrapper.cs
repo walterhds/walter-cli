@@ -7,5 +7,5 @@ internal class IOWrapper : IIOWrapper
 	public bool DirectoryExists(string directoryPath) => Directory.Exists(directoryPath);
 	public bool FileExists(string filePath) => File.Exists(filePath);
 	public string FileReadAllText(string filePath) => File.ReadAllText(filePath);
-	public void FileWriteAllText(string filePath, string content) => FileWriteAllText(filePath, content);
+	public void FileWriteAllText(string filePath, string content) => File.WriteAllText(filePath, content);
 }

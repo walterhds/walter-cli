@@ -1,6 +1,6 @@
 ﻿namespace Walter.Wrappers.Interfaces;
 
-internal interface IConsoleWrapper
+public interface IConsoleWrapper
 {
 	void WriteLine(string message);
 	void WriteError(string message);
