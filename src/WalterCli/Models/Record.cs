@@ -1,9 +1,9 @@
 ﻿using System.Text.Json.Serialization;
+using Walter.Models.Interfaces;
 
 namespace Walter.Models;
 
-internal class Record
+internal class Record : IRecord
 {
-	[JsonPropertyName("scripts")]
-	public IList<Script> ScriptList { get; set; } = [];
+	public IList<IScript> ScriptList { get; set; } = [];
 }

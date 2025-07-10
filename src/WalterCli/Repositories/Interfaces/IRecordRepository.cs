@@ -1,9 +1,9 @@
-﻿using Walter.Models;
+﻿using Walter.Models.Interfaces;
 
 namespace Walter.Repositories.Interfaces;
 
-internal interface IRecordRepository
+public interface IRecordRepository
 {
-	Record GetRecord();
-	void SaveRecord(Record record);
+	IRecord GetRecord();
+	void SaveRecord(IRecord record);
 }

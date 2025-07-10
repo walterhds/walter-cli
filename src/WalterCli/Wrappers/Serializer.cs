@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Walter.Shared.Converters;
 using Walter.Wrappers.Interfaces;
 
 namespace Walter.Wrappers;
@@ -9,7 +10,11 @@ public class Serializer : ISerializer
 	{
 		PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
 		WriteIndented = false,
-		DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
+		DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+		Converters =
+		{
+			new ScriptConverter()
+		}
 	};
 
 	public string Serialize<T>(T obj)

@@ -1,0 +1,8 @@
+{
+	"scriptList": [
+		{
+			"name": "calc",
+			"path": "C:\\repos\\run-calc.ps1"
+		}
+	]
+}
