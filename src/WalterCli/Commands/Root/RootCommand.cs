@@ -1,5 +1,6 @@
 ﻿using DotMake.CommandLine;
 using Walter.Commands.Register;
+using Walter.Commands.Run;
 using Walter.Wrappers.Interfaces;
 
 namespace Walter.Commands.Root;
@@ -8,7 +9,8 @@ namespace Walter.Commands.Root;
 	Name = "walter",
 	Description = "Walter CLI",
 	Children = [
-		typeof(RegisterCommand)
+		typeof(RegisterCommand),
+		typeof(RunCommand)
 	]
 )]
 internal class RootCommand(IConsoleWrapper consoleWrapper)

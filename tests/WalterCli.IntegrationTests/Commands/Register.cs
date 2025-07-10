@@ -1,7 +1,6 @@
 ﻿using DotMake.CommandLine;
 using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
-using Walter.Exceptions;
 using Walter.Repositories.Interfaces;
 using Walter.Wrappers.Interfaces;
 using Xunit.Abstractions;
